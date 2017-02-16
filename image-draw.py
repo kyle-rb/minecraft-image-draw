@@ -48,16 +48,13 @@ def getClosest(RGBNum):
 
 # create an array of block ids
 blockList = []
-lineNum = 0
-blockFile = open("minecraft_colors_to_block_id.txt")
+blockFile = open("colors-to-block-id.txt")
 for line in blockFile:
     blockList.append(line[0:-1].split(":"))
-    lineNum += 1
 
 # convert that array's hex strings to rgb arrays
 for block in blockList:
     block[0] = decToRGB(hexToDec(block[0]))
-
 
 im = Image.open(sys.argv[1])
 width, height = im.size
@@ -72,4 +69,3 @@ for x in range(0, width):
             mc.setBlock(x, height-y, 0, float(blockList[colorIndex][1]), float(blockList[colorIndex][2]))
 
 print "done"
-
